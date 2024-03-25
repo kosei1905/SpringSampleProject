@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>在庫の情報を編集</title>
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.2/css/bootstrap.min.css}"/>
+</head>
+<body>
+    <div th:replace="share::header"></div>
+    <div class="container">
+        <h1>在庫の編集を行う</h1>
+        <form th:action="@{/stock-edit}" th:object="${editStockForm}" method="POST">
+            <input type="hidden" th:field="*{id}" th:value="*{id}" />
+            <div class="mb-3">
+                <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="text-danger">Title Error</p>
+                <label for="bookTitle" class="form-label">商品名</label>
+                <input id="bookTitle" class="form-control" type="text" th:field="*{title}">
+            </div>
+             <div class="mb-3">
+                <p th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}" class="text-danger">Quantity Error</p>
+                <label for="bookQuantity" class="form-label">個数</label>
+                <input id="bookQuantity" class="form-control" type="number" th:field="*{quantity}">
+            </div> <div class="mb-3">
+                <p th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="text-danger">Price Error</p>
+                <label for="bookPrice" class="form-label">値段</label>
+                <input id="bookPrice" class="form-control" type="number" th:field="*{price}">
+            </div>
+            <div class="mb-3">
+                <p th:if="${#fields.hasErrors('registrationDate')}" th:errors="*{registrationDate}" class="text-danger">registrationDate Error</p>
+                <label for="bookRegistrationDate" class="form-label">登録日</label>
+                <input id="bookRegistrationDate" class="form-control" type="date" th:field="*{registrationDate}">
+            </div>
+            <input type="submit" class="btn btn-outline-primary" value="更新">
+        </form>
+        <a th:href="@{/stock-list}" class="btn btn-outline-secondary">一覧に戻る</a>
+    </div>
+</body>
+</html>
